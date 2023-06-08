@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{17d22ef9-7a07-4f6c-b306-cb4b42c3acee}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -62,6 +62,7 @@
     <Folder Include="Scripts" />
     <Folder Include="Scripts\Post-Deployment" />
     <Folder Include="Scripts\Post-Deployment\SeedTableScripts" />
+    <Folder Include="Publish Locations\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Student.sql" />
@@ -83,6 +84,8 @@
     <None Include="Scripts\Post-Deployment\SeedTableScripts\SeedTable_Instructor.sql" />
     <None Include="Scripts\Post-Deployment\SeedTableScripts\SeedTable_CourseScheduled.sql" />
     <None Include="Scripts\Post-Deployment\SeedTableScripts\SeedTable_StudentCourseScheduled.sql" />
+    <None Include="Publish Locations\AttendanceTracker.Database.dev.publish.xml" />
+    <None Include="Publish Locations\AttendanceTracker.Database.test.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />

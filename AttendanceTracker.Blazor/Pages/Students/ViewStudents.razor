@@ -1,0 +1,53 @@
+﻿@page "/viewStudents"
+@using AttendanceTracker.Application.Abstraction.Interfaces;
+@using AttendanceTracker.Application.RequestHandlers.StudentHandlers;
+@using AttendanceTracker.Domain.Models;
+@inject IOrchestrator orchestrator;
+
+
+
+<PageTitle>View All Students</PageTitle>
+<h2>Students</h2>
+@if(_students == null)
+{
+    <p><em>Loading....</em></p>
+}
+else
+{   
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Student Code</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Date Of Birth</th>
+        </tr>
+    </thead>
+
+    <tbody>
+@foreach (var student in _students)
+{
+   <tr>
+        <td scope="row">@student.StudentCode</td>
+       <td>@student.FirstName</td>
+       <td>@student.LastName</td>
+       <td>@student.DateOfBirth</td>       
+   </tr> 
+   
+}
+</tbody>
+</table>
+}
+
+
+
+@code {
+    [Parameter]
+    public IEnumerable<Student> _students { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _students = await orchestrator.GetResponseAsync<GetAllStudentsPaginatedRequest, IEnumerable<Student>>(new GetAllStudentsPaginatedRequest(1, 20));
+    }
+    //=  await orchestrator.GetResponseAsync<GetAllStudentsPaginatedRequest, IEnumerable<Student>>(new GetAllStudentsPaginatedRequest(1,20))
+}

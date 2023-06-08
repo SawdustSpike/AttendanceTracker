@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendanceTracker.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendanceTracker.Api.Tests", "AttendanceTracker.Api.Tests\AttendanceTracker.Api.Tests.csproj", "{B4A7DC6E-53C6-421C-837B-D83BCD6B146D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceTracker.Tests.Shared", "AttendanceTracker.Tests.Shared\AttendanceTracker.Tests.Shared.csproj", "{7C7BC7CB-51D7-4FE3-9A63-B32BAF9CBB59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendanceTracker.Tests.Shared", "AttendanceTracker.Tests.Shared\AttendanceTracker.Tests.Shared.csproj", "{7C7BC7CB-51D7-4FE3-9A63-B32BAF9CBB59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceTracker.Domain.Tests", "AttendanceTracker.Domain.Tests\AttendanceTracker.Domain.Tests.csproj", "{A255EF1D-FE28-4660-AF26-AA6886D0D53D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendanceTracker.Domain.Tests", "AttendanceTracker.Domain.Tests\AttendanceTracker.Domain.Tests.csproj", "{A255EF1D-FE28-4660-AF26-AA6886D0D53D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendanceTracker.Blazor", "AttendanceTracker.Blazor\AttendanceTracker.Blazor.csproj", "{8356530E-1ED2-4273-A5E4-6E4FB17F98CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{A255EF1D-FE28-4660-AF26-AA6886D0D53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A255EF1D-FE28-4660-AF26-AA6886D0D53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A255EF1D-FE28-4660-AF26-AA6886D0D53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8356530E-1ED2-4273-A5E4-6E4FB17F98CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8356530E-1ED2-4273-A5E4-6E4FB17F98CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8356530E-1ED2-4273-A5E4-6E4FB17F98CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8356530E-1ED2-4273-A5E4-6E4FB17F98CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
