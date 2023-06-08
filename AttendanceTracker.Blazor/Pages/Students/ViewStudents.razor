@@ -8,7 +8,7 @@
 
 <PageTitle>View All Students</PageTitle>
 <h2>Students</h2>
-@if(_students == null)
+@if(!_students.Any())
 {
     <p><em>Loading....</em></p>
 }
@@ -42,10 +42,10 @@ else
 
 
 @code {
-    [Parameter]
-    public IEnumerable<Student> _students { get; set; }
+    
+    private IEnumerable<Student> _students { get; set; } = Enumerable.Empty<Student>();
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         _students = await orchestrator.GetResponseAsync<GetAllStudentsPaginatedRequest, IEnumerable<Student>>(new GetAllStudentsPaginatedRequest(1, 20));
     }
