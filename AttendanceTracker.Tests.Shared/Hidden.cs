@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace AttendanceTracker.Tests.Shared
 {
-    internal class hidden
+   public class Hidden
     {
+        public static readonly string TestDatabaseConnectionString =
+             "Data Source=SPIKESTATION;Initial Catalog=AttendanceTracker_test;Integrated Security=True;Connect Timeout=60;Encrypt=False;";
     }
 }

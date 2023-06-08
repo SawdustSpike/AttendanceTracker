@@ -1,6 +1,7 @@
 ﻿using AttendanceTracker.Data.Abstraction.Interfaces;
 using AttendanceTracker.Data.Implementation;
 using AttendanceTracker.Domain.Factories;
+using AttendanceTracker.Tests.Shared;
 
 namespace AttendanceTracker.Data.Tests.TestHelpers
 {

@@ -1,0 +1,83 @@
+﻿@page "/viewStudents"
+@using AttendanceTracker.Application.Abstraction.Interfaces;
+@using AttendanceTracker.Application.RequestHandlers.StudentHandlers;
+@using AttendanceTracker.Domain.Models;
+@inject IOrchestrator orchestrator;
+
+<PageTitle>View All Students</PageTitle>
+<h2>Students</h2>
+@if(!_students.Any())
+{
+    <p><em>Loading....</em></p>
+}
+else
+{
+<p>Page Number: <input type="number" value="@PageNumber" @onchange="ChangePageNumber" placeholder="@PageNumber" /></p>
+<p>Students Per Page: <input type="number" value="@StudentsPerPage" @onchange="ChangeStudentsPerPage" placeholder="@StudentsPerPage" /></p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Student Code</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Date Of Birth</th>
+        </tr>
+    </thead>
+
+    <tbody>
+@foreach (var student in _students)
+{
+   <tr>
+        <td scope="row">@student.StudentCode</td>
+       <td>@student.FirstName</td>
+       <td>@student.LastName</td>
+       <td>@student.DateOfBirth</td>       
+   </tr> 
+   
+}
+</tbody>
+</table>
+}
+
+@code {
+    private int _pageNumber = 1;
+    private int _studentsPerPage = 20;
+
+    [Parameter]
+    public int PageNumber 
+    { 
+        get => _pageNumber;
+        set => _pageNumber = value < 1 ? 1 : value;
+        // TODO: Need to fetch count of Students so we can prevent UI from exceeding max PageNumber, which would result in an exception. Either Orchestrator returns PageCount/StudentCount information, or an endpoint returns data for frontend to determine it.
+    }
+
+    [Parameter]
+    public int StudentsPerPage
+    {
+        get => _studentsPerPage;
+        set => _studentsPerPage = value < 1 ? 1
+                                : value > 150 ? 150
+                                : value;
+    }
+
+    private IEnumerable<Student> _students { get; set; } = Enumerable.Empty<Student>();
+
+    protected override async Task OnInitializedAsync() => await LoadStudentsAsync();
+
+    private async Task ChangePageNumber(ChangeEventArgs e)
+    {
+        PageNumber = Convert.ToInt32(e?.Value);
+
+        await LoadStudentsAsync();
+    }
+
+    private async Task ChangeStudentsPerPage(ChangeEventArgs e)
+    {
+        StudentsPerPage = Convert.ToInt32(e?.Value);
+
+        await LoadStudentsAsync();
+    }
+
+    protected async Task LoadStudentsAsync() => 
+        _students = await orchestrator.GetResponseAsync<GetAllStudentsPaginatedRequest, IEnumerable<Student>>(new(PageNumber, StudentsPerPage));
+}
