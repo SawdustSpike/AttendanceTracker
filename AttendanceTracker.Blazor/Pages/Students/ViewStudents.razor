@@ -48,6 +48,7 @@ else
     { 
         get => _pageNumber;
         set => _pageNumber = value < 1 ? 1 : value;
+        // TODO: Need to fetch count of Students so we can prevent UI from exceeding max PageNumber, which would result in an exception. Either Orchestrator returns PageCount/StudentCount information, or an endpoint returns data for frontend to determine it.
     }
 
     [Parameter]
