@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace AttendanceTracker.Application.RequestHandlers.CourseHandlers
 {
-    internal class GetAllCourses
+    internal class GetAllCourses : IRequest<IEnumerable<Course>>
     {
+        public GetAllCourses() {  }
+        
     }
 }
