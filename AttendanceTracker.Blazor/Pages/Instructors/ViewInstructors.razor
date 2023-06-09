@@ -1,0 +1,52 @@
+﻿@page "/viewInstructors"
+@using AttendanceTracker.Application.Abstraction.Interfaces;
+@using AttendanceTracker.Application.RequestHandlers.InstructorHandlers;
+@using AttendanceTracker.Domain.Models;
+@inject IOrchestrator orchestrator;
+
+<PageTitle>View All Instructors</PageTitle>
+<h2>Instructors</h2>
+@if (!_instructors.Any())
+{
+    <p><em>Loading....</em></p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Instructor Code</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var instructor in _instructors)
+            {
+                <tr>
+                    <td scope="row">@instructor.InstructorCode</td>
+                    <td>@instructor.FirstName</td>
+                    <td>@instructor.LastName</td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+
+    private IEnumerable<Instructor> _instructors { get; set; } = Enumerable.Empty<Instructor>();
+
+    protected override async Task OnInitializedAsync() => await LoadInstructorsAsync();
+
+
+
+    protected async Task LoadInstructorsAsync() =>
+        _instructors = await orchestrator.GetResponseAsync<GetAllInstructorsRequest, IEnumerable<Instructor>>(new GetAllInstructorsRequest());
+}

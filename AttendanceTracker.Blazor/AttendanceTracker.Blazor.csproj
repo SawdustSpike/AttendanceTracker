@@ -11,8 +11,4 @@
     <ProjectReference Include="..\AttendanceTracker.Domain\AttendanceTracker.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Instructors\" />
-  </ItemGroup>
-
 </Project>
