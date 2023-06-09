@@ -1,5 +1,49 @@
-﻿<h3>Courses</h3>
+﻿@page "/viewCourses"
+@using AttendanceTracker.Application.Abstraction.Interfaces;
+@using AttendanceTracker.Application.RequestHandlers.CourseHandlers;
+@using AttendanceTracker.Domain.Models;
+@inject IOrchestrator orchestrator;
+
+<PageTitle>View All Courses</PageTitle>
+<h2>Courses</h2>
+@if (!_courses.Any())
+{
+    <p><em>Loading....</em></p>
+}
+else
+{    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Course Code</th>
+                <th scope="col">Name</th>
+               
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var course in _courses)
+            {
+                <tr>
+                    <td scope="row">@course.CourseCode</td>
+                    <td>@course.Name</td>
+                    
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
 
 @code {
+   
 
+    private IEnumerable<Course> _courses { get; set; } = Enumerable.Empty<Course>();
+
+    protected override async Task OnInitializedAsync() => await LoadCoursesAsync();
+
+   
+
+    protected async Task LoadCoursesAsync() =>
+        _courses = await orchestrator.GetResponseAsync<GetAllCoursesRequest, IEnumerable<Course>>(new GetAllCoursesRequest());
 }

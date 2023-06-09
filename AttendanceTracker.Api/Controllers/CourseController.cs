@@ -1,10 +1,15 @@
 ﻿using AttendanceTracker.Application.RequestHandlers.CourseHandlers;
+using AttendanceTracker.Application.RequestHandlers.SubjectHandlers;
 
 namespace AttendanceTracker.Api.Controllers
 {
     public class CourseController : BaseController
     {
         public CourseController(IOrchestrator orchestrator) : base(orchestrator) { }
+
+        [HttpPost("GetallCourses")]
+        public async Task<IEnumerable<Course>> GetAllCourses() =>
+            await _orchestrator.GetResponseAsync<GetAllCoursesRequest, IEnumerable<Course>>(new());
 
         [HttpPost("InsertCourse")]
         public async Task<Course> InsertCourse(InsertCourseRequest request) =>

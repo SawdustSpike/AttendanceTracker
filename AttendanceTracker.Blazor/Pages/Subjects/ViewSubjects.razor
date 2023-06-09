@@ -1,0 +1,49 @@
+﻿@page "/viewSubjects"
+@using AttendanceTracker.Application.Abstraction.Interfaces;
+@using AttendanceTracker.Application.RequestHandlers.SubjectHandlers;
+@using AttendanceTracker.Domain.Models;
+@inject IOrchestrator orchestrator;
+
+<PageTitle>View All Subjects</PageTitle>
+<h2>Subjects</h2>
+@if (!_subjects.Any())
+{
+    <p><em>Loading....</em></p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Subject Code</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var subject in _subjects)
+            {
+                <tr>
+                    <td scope="row">@subject.Name</td>
+                    <td scope="row">@subject.SubjectCode</td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+
+    private IEnumerable<Subject> _subjects { get; set; } = Enumerable.Empty<Subject>();
+
+    protected override async Task OnInitializedAsync() => await LoadSubjectsAsync();
+
+
+
+    protected async Task LoadSubjectsAsync() =>
+        _subjects = await orchestrator.GetResponseAsync<GetAllSubjectsRequest, IEnumerable<Subject>>(new GetAllSubjectsRequest());
+}

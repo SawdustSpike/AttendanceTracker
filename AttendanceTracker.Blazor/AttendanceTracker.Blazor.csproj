@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Instructors\" />
-    <Folder Include="Pages\Subjects\" />
   </ItemGroup>
 
 </Project>
