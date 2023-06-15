@@ -1,0 +1,68 @@
+﻿@page "/AddStudent"
+@using AttendanceTracker.Application.Abstraction.Interfaces;
+@using AttendanceTracker.Application.RequestHandlers.StudentHandlers;
+@using AttendanceTracker.Domain.Models;
+@inject IOrchestrator orchestrator;
+
+<h2>Add Student</h2>
+@if (isInsertSuccessful)
+{
+    <div class="alert alert-success" role="alert">
+        Data inserted successfully!
+    </div>
+}
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
+<form>
+    @*<div class="form-group">
+        <label for="studentCodeInput">Student Code</label>
+        <input type="text" class="form-control" id="studentCodeInput" @bind="_student.StudentCode" />
+    </div>*@
+    <div class="form-group">
+        <label for="firstNameInput">First Name</label>
+        <input type="text" class="form-control" id="firstNameInput" @bind="_student.FirstName" />
+    </div>
+    <div class="form-group">
+        <label for="lastNameInput">Last Name</label>
+        <input type="text" class="form-control" id="lastNameInput" @bind="_student.LastName" />
+    </div>
+    <div class="form-group">
+        <label for="dateOfBirthInput">Date Of Birth</label>
+        <input type="datetime-local" class="form-control" id="dateOfBirthInput" @bind="_student.DateOfBirth" />
+    </div>
+    <button type="button" class="btn btn-primary" @onclick="InsertStudent">Submit</button>
+</form>
+
+@code {
+    private InsertStudentRequest _student = new InsertStudentRequest();
+    private bool isInsertSuccessful = false;
+    private string errorMessage = null;
+    //private YourDatabaseService databaseService;
+
+    //public InsertData(YourDatabaseService databaseService)
+    //{
+    //    this.databaseService = databaseService;
+    //}
+    
+    protected async Task InsertStudent()
+    {
+        try
+        {
+            //orchestrator.ExecuteRequestAsync <InsertStudentRequest>(_student);
+            isInsertSuccessful = true;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error inserting data: " + ex.Message;
+        }
+    }
+}
+@code {
+
+}
